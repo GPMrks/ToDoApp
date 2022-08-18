@@ -3,10 +3,19 @@
  */
 package ToDoApp;
 
+import util.ConnectionFactory;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
 public class App {
     
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws SQLException {
+
+        Connection connection = ConnectionFactory.getConnection();
+
+        ConnectionFactory.closeConnection(connection);
+
     }
     
 }
