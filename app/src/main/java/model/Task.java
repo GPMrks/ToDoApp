@@ -10,32 +10,47 @@ import java.util.Date;
  *
  * @author gpmrks
  */
-public class Project {
+public class Task {
     
     private int id;
+    private int idProject;
     private String name;
     private String description;
+    private String notes;
+    private boolean status;
+    private Date deadline;
     private Date creationDate;
     private Date modificationDate;
 
-    public Project(){
-        
+    public Task() {
     }
-    
-    public Project(int id, String name, String description, Date creationDate, Date modificationDate) {
+
+    public Task(int id, int idProject, String name, String description, String notes, boolean status, Date deadline, Date creationDate, Date modificationDate) {
         this.id = id;
+        this.idProject = idProject;
         this.name = name;
         this.description = description;
+        this.notes = notes;
+        this.status = status;
+        this.deadline = deadline;
         this.creationDate = creationDate;
         this.modificationDate = modificationDate;
     }
-    
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdProject() {
+        return idProject;
+    }
+
+    public void setIdProject(int idProject) {
+        this.idProject = idProject;
     }
 
     public String getName() {
@@ -52,6 +67,30 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
     }
 
     public Date getCreationDate() {
@@ -72,7 +111,7 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" + "id=" + id + ", name=" + name + ", description=" + description + ", creationDate=" + creationDate + ", modificationDate=" + modificationDate + '}';
+        return "Task{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", description=" + description + ", notes=" + notes + ", status=" + status + ", deadline=" + deadline + ", creationDate=" + creationDate + ", modificationDate=" + modificationDate + '}';
     }
     
 }
