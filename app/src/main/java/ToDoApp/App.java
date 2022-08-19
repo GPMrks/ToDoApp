@@ -3,19 +3,54 @@
  */
 package ToDoApp;
 
-import util.ConnectionFactory;
+import controller.ProjectController;
+import controller.TaskController;
+import model.Project;
+import model.Task;
 
-import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
 
 public class App {
-    
+
     public static void main(String[] args) throws SQLException {
 
-        Connection connection = ConnectionFactory.getConnection();
+        ProjectController projectController = new ProjectController();
 
-        ConnectionFactory.closeConnection(connection);
+        Project project = new Project();
+        project.setName("Projeto teste");
+        project.setDescription("Descrição do Projeto teste");
+        project.setCreationDate(LocalDate.now());
+        project.setModificationDate(LocalDate.now());
+//        projectController.save(project);
 
+        project.setId(4);
+        project.setName("Novo nome do projeto");
+        projectController.update(project);
+//
+        List<Project> projects = projectController.getAll();
+        System.out.println("Total de projetos = " + projects);
+
+        TaskController taskController = new TaskController();
+
+        Task task = new Task();
+        task.setIdProject(4);
+        task.setName("Criar as telas da aplicação");
+        task.setDescription("Devem ser criadas telas para os cadastros");
+        task.setNotes("Sem notas");
+        task.setDone(false);
+        task.setDeadline(LocalDate.now().plusDays(15));
+        task.setCreationDate(LocalDate.now());
+        task.setModificationDate(LocalDate.now());
+
+//        taskController.save(task);
+
+        task.setName("Alterar as telas da aplicação");
+        taskController.update(task);
+
+        List<Task> tasks = taskController.getAll(4);
+        System.out.println("Total de tarefas = " + tasks);
     }
-    
+
 }

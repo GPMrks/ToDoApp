@@ -4,34 +4,34 @@
  */
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
- *
  * @author gpmrks
  */
 public class Task {
-    
+
     private int id;
     private int idProject;
     private String name;
     private String description;
     private String notes;
-    private boolean status;
-    private Date deadline;
-    private Date creationDate;
-    private Date modificationDate;
+    private boolean done;
+    private LocalDate deadline;
+    private LocalDate creationDate;
+    private LocalDate modificationDate;
 
     public Task() {
+        this.creationDate = LocalDate.now();
     }
 
-    public Task(int id, int idProject, String name, String description, String notes, boolean status, Date deadline, Date creationDate, Date modificationDate) {
+    public Task(int id, int idProject, String name, String description, String notes, boolean status, LocalDate deadline, LocalDate creationDate, LocalDate modificationDate) {
         this.id = id;
         this.idProject = idProject;
         this.name = name;
         this.description = description;
         this.notes = notes;
-        this.status = status;
+        this.done = status;
         this.deadline = deadline;
         this.creationDate = creationDate;
         this.modificationDate = modificationDate;
@@ -77,41 +77,41 @@ public class Task {
         this.notes = notes;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isDone() {
+        return done;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setDone(boolean status) {
+        this.done = status;
     }
 
-    public Date getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Date getModificationDate() {
+    public LocalDate getModificationDate() {
         return modificationDate;
     }
 
-    public void setModificationDate(Date modificationDate) {
+    public void setModificationDate(LocalDate modificationDate) {
         this.modificationDate = modificationDate;
     }
 
     @Override
     public String toString() {
-        return "Task{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", description=" + description + ", notes=" + notes + ", status=" + status + ", deadline=" + deadline + ", creationDate=" + creationDate + ", modificationDate=" + modificationDate + '}';
+        return "Task{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", description=" + description + ", notes=" + notes + ", status=" + done + ", deadline=" + deadline + ", creationDate=" + creationDate + ", modificationDate=" + modificationDate + '}';
     }
-    
+
 }

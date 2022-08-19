@@ -4,32 +4,31 @@
  */
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
- *
  * @author gpmrks
  */
 public class Project {
-    
+
     private int id;
     private String name;
     private String description;
-    private Date creationDate;
-    private Date modificationDate;
+    private LocalDate creationDate;
+    private LocalDate modificationDate;
 
-    public Project(){
-        
+    public Project() {
+
     }
-    
-    public Project(int id, String name, String description, Date creationDate, Date modificationDate) {
+
+    public Project(int id, String name, String description, LocalDate creationDate, LocalDate modificationDate) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.creationDate = creationDate;
         this.modificationDate = modificationDate;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -54,19 +53,19 @@ public class Project {
         this.description = description;
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Date getModificationDate() {
+    public LocalDate getModificationDate() {
         return modificationDate;
     }
 
-    public void setModificationDate(Date modificationDate) {
+    public void setModificationDate(LocalDate modificationDate) {
         this.modificationDate = modificationDate;
     }
 
@@ -74,5 +73,5 @@ public class Project {
     public String toString() {
         return "Project{" + "id=" + id + ", name=" + name + ", description=" + description + ", creationDate=" + creationDate + ", modificationDate=" + modificationDate + '}';
     }
-    
+
 }
