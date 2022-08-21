@@ -4,20 +4,31 @@
  */
 package view;
 
+import controller.ProjectController;
+import controller.TaskController;
+import model.Project;
+
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.List;
 
 /**
- *
  * @author gpmrks
  */
 public class MainScreen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainScreen
-     */
+    ProjectController projectController;
+    TaskController taskController;
+
+    DefaultListModel projectDefaultListModel;
+
     public MainScreen() {
         initComponents();
         decorateTableTasks();
+        initDataController();
+        initComponentsModel();
     }
 
     /**
@@ -146,7 +157,7 @@ public class MainScreen extends javax.swing.JFrame {
             jPanelProjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProjectsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelProjectsTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addComponent(jLabelProjectsTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(21, 21, 21)
                 .addComponent(jLabelProjectsAdd)
                 .addContainerGap())
@@ -207,11 +218,6 @@ public class MainScreen extends javax.swing.JFrame {
         jListProjects.setBackground(new java.awt.Color(255, 255, 255));
         jListProjects.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jListProjects.setForeground(new java.awt.Color(0, 0, 0));
-        jListProjects.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jListProjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jListProjects.setFixedCellHeight(50);
         jListProjects.setSelectionBackground(new java.awt.Color(0, 153, 102));
@@ -328,6 +334,13 @@ public class MainScreen extends javax.swing.JFrame {
     private void jLabelProjectsAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelProjectsAddMouseClicked
         ProjectDialogScreen projectDialogScreen = new ProjectDialogScreen(this, rootPaneCheckingEnabled);
         projectDialogScreen.setVisible(true);
+
+        projectDialogScreen.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                loadProjects();
+            }
+        });
     }//GEN-LAST:event_jLabelProjectsAddMouseClicked
 
     private void jLabelTasksAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTasksAddMouseClicked
@@ -343,7 +356,7 @@ public class MainScreen extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -393,7 +406,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTable jTableTasks;
     // End of variables declaration//GEN-END:variables
 
-    public void decorateTableTasks(){
+    public void decorateTableTasks() {
 
         jTableTasks.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
         jTableTasks.getTableHeader().setBackground(new Color(0, 153, 102));
@@ -401,5 +414,27 @@ public class MainScreen extends javax.swing.JFrame {
 
         jTableTasks.setAutoCreateRowSorter(true);
 
+    }
+
+    public void initDataController() {
+        projectController = new ProjectController();
+        taskController = new TaskController();
+    }
+
+    public void initComponentsModel(){
+        projectDefaultListModel = new DefaultListModel<>();
+        loadProjects();
+    }
+
+    public void loadProjects() {
+        List<Project> projects = projectController.getAll();
+        projectDefaultListModel.clear();
+
+        for (int i = 0; i < projects.size(); i++) {
+            Project project = projects.get(i);
+            projectDefaultListModel.addElement(project.getName());
+        }
+
+        jListProjects.setModel(projectDefaultListModel);
     }
 }
