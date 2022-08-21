@@ -8,6 +8,8 @@ import controller.ProjectController;
 import controller.TaskController;
 import model.Project;
 import model.Task;
+import util.ButtonCellRenderer;
+import util.DeadlineCellRenderer;
 import util.TaskTableModel;
 
 import javax.swing.*;
@@ -30,9 +32,9 @@ public class MainScreen extends javax.swing.JFrame {
 
     public MainScreen() {
         initComponents();
-        decorateTableTasks();
         initDataController();
         initComponentsModel();
+        decorateTableTasks();
     }
 
     /**
@@ -453,7 +455,11 @@ public class MainScreen extends javax.swing.JFrame {
         jTableTasks.getTableHeader().setBackground(new Color(0, 153, 102));
         jTableTasks.getTableHeader().setForeground(new Color(255, 255, 255));
 
-        jTableTasks.setAutoCreateRowSorter(true);
+        jTableTasks.getColumnModel().getColumn(2).setCellRenderer(new DeadlineCellRenderer());
+
+        jTableTasks.getColumnModel().getColumn(4).setCellRenderer(new ButtonCellRenderer("edit"));
+
+        jTableTasks.getColumnModel().getColumn(5).setCellRenderer(new ButtonCellRenderer("delete"));
 
     }
 
