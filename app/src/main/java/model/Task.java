@@ -22,7 +22,7 @@ public class Task {
     private LocalDate modificationDate;
 
     public Task() {
-        this.creationDate = LocalDate.now();
+
     }
 
     public Task(int id, int idProject, String name, String description, String notes, boolean status, LocalDate deadline, LocalDate creationDate, LocalDate modificationDate) {
