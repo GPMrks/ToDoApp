@@ -230,7 +230,7 @@ public class TaskDialogScreen extends javax.swing.JDialog {
         Task task = new Task();
 
         try {
-            task.setIdProject(13);
+            task.setIdProject(project.getId());
             task.setName(jTextFieldTaskName.getText());
             task.setDescription(jTextAreaTaskDescription.getText());
             task.setDeadline(LocalDate.parse(jFormattedTextFieldDeadline.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
